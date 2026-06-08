@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AcademeForge Download Center</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --primary:#4f46e5;
+    --primary-dark:#3730a3;
+    --accent:#06b6d4;
+    --bg:#eef2ff;
+    --card:#ffffff;
+    --text:#111827;
+    --muted:#6b7280;
+    --success:#22c55e;
+}
+
+body{
+    font-family:'Nunito',sans-serif;
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top right,#c7d2fe,transparent 30%),
+    radial-gradient(circle at bottom left,#a5f3fc,transparent 35%),
+    var(--bg);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.af-container{
+    width:100%;
+    max-width:420px;
+}
+
+.af-card{
+    background:var(--card);
+    border-radius:30px;
+    overflow:hidden;
+
+    box-shadow:
+    0 25px 70px rgba(0,0,0,.15);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.af-hero{
+    text-align:center;
+    padding:35px 25px;
+
+    background:
+    radial-gradient(circle at top right,
+    rgba(255,255,255,.20),
+    transparent 40%),
+
+    linear-gradient(
+    135deg,
+    var(--primary),
+    var(--accent)
+    );
+}
+
+.af-logo{
+    width:90px;
+    height:90px;
+
+    margin:auto;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.15);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#fff;
+    font-size:34px;
+    font-weight:900;
+    font-family:'Sora',sans-serif;
+}
+
+.af-title{
+    margin-top:16px;
+    color:white;
+    font-family:'Sora',sans-serif;
+    font-size:28px;
+    font-weight:800;
+}
+
+.af-tagline{
+    color:rgba(255,255,255,.9);
+    margin-top:8px;
+    font-size:14px;
+}
+
+/* =========================
+   BODY
+========================= */
+
+.af-body{
+    padding:25px;
+}
+
+.af-version{
+    text-align:center;
+    font-size:24px;
+    font-weight:900;
+    color:var(--text);
+}
+
+.af-badge{
+    width:max-content;
+
+    margin:10px auto 0;
+
+    padding:7px 14px;
+
+    border-radius:999px;
+
+    background:rgba(34,197,94,.10);
+
+    color:var(--success);
+
+    font-size:12px;
+    font-weight:800;
+}
+
+.af-desc{
+    text-align:center;
+    margin-top:18px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.af-section{
+    margin-top:28px;
+}
+
+.af-section-title{
+    font-size:15px;
+    font-weight:800;
+    margin-bottom:14px;
+}
+
+.af-feature{
+    display:flex;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.af-feature span{
+    color:var(--success);
+    font-weight:900;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.af-download-btn{
+    display:block;
+    width:100%;
+
+    text-align:center;
+    text-decoration:none;
+
+    margin-top:28px;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+    );
+
+    color:white;
+
+    font-size:16px;
+    font-weight:800;
+
+    transition:.25s;
+}
+
+.af-download-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================
+   INFO BOX
+========================= */
+
+.af-info{
+    margin-top:20px;
+
+    background:#f8fafc;
+
+    border-radius:18px;
+
+    padding:16px;
+}
+
+.af-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.af-row:last-child{
+    margin-bottom:0;
+}
+
+.af-label{
+    color:var(--muted);
+}
+
+.af-value{
+    color:var(--text);
+    font-weight:700;
+}
+
+.af-secure{
+    margin-top:15px;
+    text-align:center;
+    color:var(--success);
+    font-weight:800;
+}
+
+.af-footer{
+    margin-top:18px;
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+}
+.af-logo{
+    width:90px;
+    height:90px;
+
+    margin:auto;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.15);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.af-logo-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:24px;
+    display:block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="af-container">
+
+<div class="af-card">
+
+<div class="af-hero">
+
+<div class="af-logo">
+    <img
+        src="/IMG/AF LOGO 2.jpeg"
+        alt="AcademeForge Logo"
+        class="af-logo-img"
+    >
+</div>
+
+<div class="af-title">
+AcademeForge
+</div>
+
+<div class="af-tagline">
+Learning Beyond The Classroom
+</div>
+
+</div>
+
+<div class="af-body">
+
+<div class="af-version">
+Version 2.0.4
+</div>
+
+<div class="af-badge">
+Latest Stable Release
+</div>
+
+<div class="af-desc">
+Download the latest version of AcademeForge and enjoy improved performance, bug fixes and a smoother learning experience.
+</div>
+
+<div class="af-section">
+
+<div class="af-section-title">
+What's New
+</div>
+
+<div class="af-feature"><span>✓</span> Faster Performance</div>
+<div class="af-feature"><span>✓</span> UI Improvements</div>
+<div class="af-feature"><span>✓</span> Bug Fixes</div>
+<div class="af-feature"><span>✓</span> Better Learning Experience</div>
+<div class="af-feature"><span>✓</span> Enhanced Navigation</div>
+
+</div>
+
+<a
+href="academeforge2.0.4.apk"
+download
+class="af-download-btn"
+id="downloadBtn">
+
+⬇ Download AcademeForge v2.0.4
+
+</a>
+
+<div class="af-secure">
+🔒 Official & Secure Download
+</div>
+
+<div class="af-info">
+
+<div class="af-row">
+<div class="af-label">Version</div>
+<div class="af-value">2.0.4</div>
+</div>
+
+<div class="af-row">
+<div class="af-label">Platform</div>
+<div class="af-value">Android APK</div>
+</div>
+
+<div class="af-row">
+<div class="af-label">Developer</div>
+<div class="af-value">Devraj Kumar</div>
+</div>
+
+<div class="af-row">
+<div class="af-label">Status</div>
+<div class="af-value">Latest Release</div>
+</div>
+
+</div>
+
+<div class="af-footer">
+© AcademeForge • Learning Beyond The Classroom
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* =========================
+   JAVASCRIPT
+========================= */
+
+document
+.getElementById("downloadBtn")
+.addEventListener("click", function(){
+
+    console.log(
+    "AcademeForge v2.0.4 download started"
+    );
+
+});
+
+</script>
+
+</body>
+</html>
+
