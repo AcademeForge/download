@@ -42,7 +42,6 @@ body {
 /* ==========================================
    2. HIGH-PERFORMANCE BACKGROUND
    ========================================== */
-/* Static noise/dot grid - zero performance hit */
 body::before {
     content: '';
     position: fixed;
@@ -53,7 +52,6 @@ body::before {
     pointer-events: none;
 }
 
-/* Hardware-accelerated glowing orbs */
 .ambient-orb {
     position: fixed;
     border-radius: 50%;
@@ -88,13 +86,13 @@ body::before {
 }
 
 /* ==========================================
-   3. RESPONSIVE GRID LAYOUT (Landscape/Portrait)
+   3. RESPONSIVE GRID LAYOUT 
    ========================================== */
 .af-container {
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 1100px; /* Wide for Laptops */
+    max-width: 1100px;
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 32px;
@@ -104,17 +102,15 @@ body::before {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr; /* Left column slightly wider */
+    grid-template-columns: 1.1fr 0.9fr;
     gap: 60px;
     align-items: center;
 
-    /* Intro Keyframe */
     opacity: 0;
     transform: translateY(30px);
     animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Mobile / Portrait override */
 @media (max-width: 960px) {
     .af-container {
         grid-template-columns: 1fr;
@@ -165,6 +161,9 @@ body::before {
     font-size: 13px;
     font-weight: 700;
     border: 1px solid rgba(99,102,241,.3);
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .af-title {
@@ -210,7 +209,6 @@ body::before {
     font-size: 72px;
     display: inline-block;
     will-change: transform;
-    /* Hardware accelerated float */
     animation: smoothFloat 4s ease-in-out infinite;
     filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
 }
@@ -277,7 +275,31 @@ body::before {
 }
 
 /* ==========================================
-   6. OPTIMIZED STAGGERED ENTRANCE
+   6. ICON ANIMATIONS (SPIN & WIGGLE)
+   ========================================== */
+.spin-icon {
+    display: inline-block;
+    animation: spin 3s linear infinite;
+    font-size: 16px;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.wiggle-icon {
+    display: inline-block;
+    animation: wiggle 1.5s ease-in-out infinite;
+    font-size: clamp(32px, 4vw, 48px);
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(15deg) scale(1.1); }
+}
+
+/* ==========================================
+   7. OPTIMIZED STAGGERED ENTRANCE
    ========================================== */
 .stagger {
     opacity: 0;
@@ -299,23 +321,26 @@ body::before {
 </head>
 <body>
 
+<!-- High Performance Background Elements -->
 <div class="ambient-orb orb-1"></div>
 <div class="ambient-orb orb-2"></div>
 
 <div class="af-container">
     
+    <!-- Left Column: Branding and Text -->
     <div class="af-left-col">
         <div class="af-header-group stagger d-1">
             <div class="af-logo">
                 <img src="AF LOGO 2.jpeg" alt="AcademeForge" onerror="this.src='https://via.placeholder.com/150/0f172a/ffffff?text=AF'">
             </div>
             <div class="af-badge">
-                🚧 Platform Update
+                <span class="spin-icon">⚙️</span> Platform Update
             </div>
         </div>
 
+        <!-- Added the wiggle fire emoji next to the heading -->
         <h1 class="af-title stagger d-2">
-            We're <span class="af-highlight">Cooking</span><br>
+            We're <span class="af-highlight">Cooking</span> <span class="wiggle-icon">🔥</span><br>
             Something Better.
         </h1>
 
@@ -326,6 +351,7 @@ body::before {
         </p>
     </div>
 
+    <!-- Right Column: Status and Visuals -->
     <div class="af-right-col stagger d-4">
         <div class="af-cooking">👨‍🍳</div>
         
@@ -344,6 +370,10 @@ body::before {
                 <div class="af-box-title">🎨 UI/UX</div>
                 <div class="af-box-text">Refining</div>
             </div>
+           <div class="af-box">
+    <div class="af-box-title">🧪 Testing</div>
+    <div class="af-box-text">In Progress</div>
+</div>
             <div class="af-box">
                 <div class="af-box-title">🚀 Launch</div>
                 <div class="af-box-text">Pending</div>
@@ -351,6 +381,7 @@ body::before {
         </div>
     </div>
 
+    <!-- Footer -->
     <div class="af-footer stagger d-4">
         © AcademeForge 2026 • Learning Beyond The Classroom
     </div>
