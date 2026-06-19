@@ -17,101 +17,127 @@
 }
 
 :root {
-    --bg-dark: #020617;
-    --card-bg: rgba(15, 23, 42, 0.6);
-    --border: rgba(255, 255, 255, 0.08);
-    --text-main: #ffffff;
-    --text-muted: #94a3b8;
-    --accent-1: #818cf8;
-    --accent-2: #67e8f9;
+    --bg-main: #fcf8f3; /* Light cream background matching the image */
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+    --text-main: #0f172a; /* Dark navy text */
+    --text-muted: #475569;
+    --accent-1: #0f172a;
+    --accent-2: #334155;
+    --btn-bg: #0f172a;
+    --btn-text: #ffffff;
 }
 
 body {
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-main);
     color: var(--text-main);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 24px;
     overflow-x: hidden;
     position: relative;
 }
 
-/* ==========================================
-   2. HIGH-PERFORMANCE BACKGROUND
-   ========================================== */
+/* Subtle grid background pattern */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 32px 32px;
-    z-index: 0;
+    background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
     pointer-events: none;
 }
 
-.ambient-orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.4;
-    z-index: 0;
-    pointer-events: none;
-    will-change: transform;
+/* ==========================================
+   2. HEADER
+   ========================================== */
+.main-header {
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    max-width: 1400px;
 }
 
-.orb-1 {
-    width: 60vw;
-    height: 60vw;
-    background: #312e81;
-    top: -20%;
-    left: -10%;
-    animation: orbDrift 20s ease-in-out infinite alternate;
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.orb-2 {
-    width: 50vw;
-    height: 50vw;
-    background: #0891b2;
-    bottom: -20%;
-    right: -10%;
-    animation: orbDrift 25s ease-in-out infinite alternate-reverse;
+.header-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-@keyframes orbDrift {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(10%, 10%, 0); }
+.header-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+}
+
+.website-btn {
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background-color 0.2s ease;
+}
+
+.website-btn:hover {
+    background-color: #1e293b;
 }
 
 /* ==========================================
    3. RESPONSIVE GRID LAYOUT 
    ========================================== */
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 24px;
+}
+
 .af-container {
-    position: relative;
-    z-index: 10;
     width: 100%;
     max-width: 1100px;
     background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 32px;
+    border-radius: 24px;
     padding: 60px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
     
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     gap: 60px;
     align-items: center;
-
-    opacity: 0;
-    transform: translateY(30px);
-    animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @media (max-width: 960px) {
+    .main-header {
+        padding: 20px;
+    }
     .af-container {
         grid-template-columns: 1fr;
         padding: 40px 24px;
@@ -123,62 +149,30 @@ body::before {
 /* ==========================================
    4. TYPOGRAPHY & ELEMENTS
    ========================================== */
-.af-header-group {
-    display: flex;
+.af-badge {
+    display: inline-flex;
+    padding: 6px 14px;
+    border-radius: 99px;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid #e2e8f0;
     align-items: center;
-    gap: 16px;
+    gap: 6px;
     margin-bottom: 24px;
 }
 
-@media (max-width: 960px) {
-    .af-header-group {
-        justify-content: center;
-        flex-direction: column;
-    }
-}
-
-.af-logo {
-    width: 72px;
-    height: 72px;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.1);
-    box-shadow: 0 8px 20px rgba(99,102,241,.3);
-    flex-shrink: 0;
-}
-
-.af-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.af-badge {
-    padding: 8px 16px;
-    border-radius: 99px;
-    background: rgba(99,102,241,.15);
-    color: #c7d2fe;
-    font-size: 13px;
-    font-weight: 700;
-    border: 1px solid rgba(99,102,241,.3);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
 .af-title {
-    font-size: clamp(40px, 5vw, 64px);
+    font-size: clamp(40px, 5vw, 56px);
     font-weight: 900;
-    line-height: 1.1;
+    line-height: 1.15;
     letter-spacing: -1.5px;
     margin-bottom: 20px;
 }
 
 .af-highlight {
-    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent-1);
 }
 
 .af-desc {
@@ -196,32 +190,23 @@ body::before {
    5. RIGHT COLUMN (GRAPHICS & STATUS)
    ========================================== */
 .af-right-col {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 20px;
     padding: 40px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
 }
 
 .af-cooking {
-    font-size: 72px;
+    font-size: 64px;
     display: inline-block;
-    will-change: transform;
-    animation: smoothFloat 4s ease-in-out infinite;
-    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
-}
-
-@keyframes smoothFloat {
-    0%, 100% { transform: translate3d(0, 0, 0); }
-    50% { transform: translate3d(0, -15px, 0); }
+    margin-bottom: 16px;
 }
 
 .af-message {
-    margin-top: 24px;
     font-size: 24px;
     font-weight: 800;
+    color: var(--text-main);
 }
 
 .af-sub {
@@ -240,21 +225,15 @@ body::before {
 }
 
 .af-box {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
     padding: 16px;
-    transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.af-box:hover {
-    transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(103, 232, 249, 0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .af-box-title {
-    color: white;
+    color: var(--text-main);
     font-weight: 700;
     font-size: 14px;
     margin-bottom: 4px;
@@ -267,125 +246,82 @@ body::before {
 
 .af-footer {
     grid-column: 1 / -1;
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: center;
-    color: #475569;
+    color: #64748b;
     font-size: 14px;
     font-weight: 500;
-}
-
-/* ==========================================
-   6. ICON ANIMATIONS (SPIN & WIGGLE)
-   ========================================== */
-.spin-icon {
-    display: inline-block;
-    animation: spin 3s linear infinite;
-    font-size: 16px;
-}
-
-@keyframes spin {
-    100% { transform: rotate(360deg); }
-}
-
-.wiggle-icon {
-    display: inline-block;
-    animation: wiggle 1.5s ease-in-out infinite;
-    font-size: clamp(32px, 4vw, 48px);
-}
-
-@keyframes wiggle {
-    0%, 100% { transform: rotate(-10deg); }
-    50% { transform: rotate(15deg) scale(1.1); }
-}
-
-/* ==========================================
-   7. OPTIMIZED STAGGERED ENTRANCE
-   ========================================== */
-.stagger {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0);
-}
-
-.d-1 { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s; }
-.d-2 { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s; }
-.d-3 { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s; }
-.d-4 { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s; }
-
-@keyframes slideUpFade {
-    to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
 }
 </style>
 </head>
 <body>
 
-<!-- High Performance Background Elements -->
-<div class="ambient-orb orb-1"></div>
-<div class="ambient-orb orb-2"></div>
+<header class="main-header">
+    <div class="header-left">
+        <div class="header-logo">
+            <img src="AF LOGO 2.jpeg" alt="AcademeForge" onerror="this.src='https://via.placeholder.com/150/0f172a/ffffff?text=AF'">
+        </div>
+        <span class="header-title">AcademeForge</span>
+    </div>
+    <div class="header-actions">
+        <a href="https://beta.academeforge.in" class="website-btn">WEBSITE</a>
+    </div>
+</header>
 
-<div class="af-container">
-    
-    <!-- Left Column: Branding and Text -->
-    <div class="af-left-col">
-        <div class="af-header-group stagger d-1">
-            <div class="af-logo">
-                <img src="AF LOGO 2.jpeg" alt="AcademeForge" onerror="this.src='https://via.placeholder.com/150/0f172a/ffffff?text=AF'">
-            </div>
+<div class="main-wrapper">
+    <div class="af-container">
+        
+        <div class="af-left-col">
             <div class="af-badge">
-                <span class="spin-icon">⚙️</span> Platform Update
+                <span>⚙️</span> Platform Update
+            </div>
+
+            <h1 class="af-title">
+                We're <span class="af-highlight">Cooking</span> 🔥<br>
+                Something Better.
+            </h1>
+
+            <p class="af-desc">
+                The next version of AcademeForge is currently under development. 
+                We're refining the experience, optimizing performance, and preparing 
+                something truly worth the wait.
+            </p>
+        </div>
+
+        <div class="af-right-col">
+            <div class="af-cooking">👨‍🍳</div>
+            
+            <div class="af-message">Not ready yet.</div>
+            
+            <div class="af-sub">
+                Our developers are arguing with bugs, optimizing code, and pretending everything is under control.
+            </div>
+
+            <div class="af-status">
+                <div class="af-box">
+                    <div class="af-box-title">⚡ Speed</div>
+                    <div class="af-box-text">Accelerating</div>
+                </div>
+                <div class="af-box">
+                    <div class="af-box-title">🎨 UI/UX</div>
+                    <div class="af-box-text">Refining</div>
+                </div>
+                <div class="af-box">
+                    <div class="af-box-title">🧪 Testing</div>
+                    <div class="af-box-text">In Progress</div>
+                </div>
+                <div class="af-box">
+                    <div class="af-box-title">🚀 Launch</div>
+                    <div class="af-box-text">Pending</div>
+                </div>
             </div>
         </div>
 
-        <!-- Added the wiggle fire emoji next to the heading -->
-        <h1 class="af-title stagger d-2">
-            We're <span class="af-highlight">Cooking</span> <span class="wiggle-icon">🔥</span><br>
-            Something Better.
-        </h1>
-
-        <p class="af-desc stagger d-3">
-            The next version of AcademeForge is currently under development. 
-            We're refining the experience, optimizing performance, and preparing 
-            something truly worth the wait.
-        </p>
-    </div>
-
-    <!-- Right Column: Status and Visuals -->
-    <div class="af-right-col stagger d-4">
-        <div class="af-cooking">👨‍🍳</div>
-        
-        <div class="af-message">Not ready yet.</div>
-        
-        <div class="af-sub">
-            Our developers are arguing with bugs, optimizing code, and pretending everything is under control.
+        <div class="af-footer">
+            © AcademeForge 2026 • Learning Beyond The Classroom
         </div>
 
-        <div class="af-status">
-            <div class="af-box">
-                <div class="af-box-title">⚡ Speed</div>
-                <div class="af-box-text">Accelerating</div>
-            </div>
-            <div class="af-box">
-                <div class="af-box-title">🎨 UI/UX</div>
-                <div class="af-box-text">Refining</div>
-            </div>
-           <div class="af-box">
-    <div class="af-box-title">🧪 Testing</div>
-    <div class="af-box-text">In Progress</div>
-</div>
-            <div class="af-box">
-                <div class="af-box-title">🚀 Launch</div>
-                <div class="af-box-text">Pending</div>
-            </div>
-        </div>
     </div>
-
-    <!-- Footer -->
-    <div class="af-footer stagger d-4">
-        © AcademeForge 2026 • Learning Beyond The Classroom
-    </div>
-
 </div>
 
 </body>
