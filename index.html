@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AcademeForge • Learning beyond the classroom</title>
+<title>AcademeForge • We're Cooking (Bugs)</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" type="image/jpeg" href="AF LOGO 2.jpeg">
 <style>
@@ -17,13 +17,11 @@
 }
 
 :root {
-    --bg-main: #fcf8f3; /* Light cream background matching the image */
+    --bg-main: #fcf8f3; /* Light cream background */
     --card-bg: #ffffff;
     --border: #e2e8f0;
-    --text-main: #0f172a; /* Dark navy text */
+    --text-main: #0f172a; 
     --text-muted: #475569;
-    --accent-1: #0f172a;
-    --accent-2: #334155;
     --btn-bg: #0f172a;
     --btn-text: #ffffff;
 }
@@ -58,12 +56,15 @@ body::before {
    ========================================== */
 .main-header {
     width: 100%;
-    padding: 20px 40px;
+    padding: 16px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: transparent;
-    max-width: 1400px;
+    background-color: #ffffff; /* White background as requested */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Added slight shadow for depth */
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .header-left {
@@ -73,10 +74,11 @@ body::before {
 }
 
 .header-logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .header-logo img {
@@ -100,11 +102,14 @@ body::before {
     border-radius: 8px;
     font-weight: 600;
     font-size: 15px;
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
 }
 
 .website-btn:hover {
     background-color: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.3);
 }
 
 /* ==========================================
@@ -116,17 +121,14 @@ body::before {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 24px;
+    padding: 40px 24px;
 }
 
 .af-container {
     width: 100%;
     max-width: 1100px;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 60px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    background: transparent; /* Made completely transparent */
+    /* Removed border and box-shadow */
     
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
@@ -136,12 +138,11 @@ body::before {
 
 @media (max-width: 960px) {
     .main-header {
-        padding: 20px;
+        padding: 16px 20px;
     }
     .af-container {
         grid-template-columns: 1fr;
-        padding: 40px 24px;
-        gap: 40px;
+        gap: 50px;
         text-align: center;
     }
 }
@@ -151,34 +152,52 @@ body::before {
    ========================================== */
 .af-badge {
     display: inline-flex;
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 99px;
-    background: #f1f5f9;
-    color: #475569;
-    font-size: 13px;
+    background: #ffedd5; /* Warm orange bg */
+    color: #c2410c; /* Dark orange text */
+    font-size: 14px;
     font-weight: 700;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #fdba74;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+}
+
+/* Cycle tyre spinning animation */
+.gear-icon {
+    display: inline-block;
+    font-size: 16px;
+    animation: spin-tire 2s linear infinite;
+    transform-origin: center center;
+}
+
+@keyframes spin-tire {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .af-title {
-    font-size: clamp(40px, 5vw, 56px);
+    font-size: clamp(40px, 5vw, 60px);
     font-weight: 900;
     line-height: 1.15;
     letter-spacing: -1.5px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
+/* Gradient highlight for the text */
 .af-highlight {
-    color: var(--accent-1);
+    background: linear-gradient(90deg, #ea580c, #dc2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
 .af-desc {
     color: var(--text-muted);
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.7;
     max-width: 500px;
 }
 
@@ -190,23 +209,44 @@ body::before {
    5. RIGHT COLUMN (GRAPHICS & STATUS)
    ========================================== */
 .af-right-col {
-    background: #f8fafc;
+    background: #ffffff; /* Keeping the box itself white so it stands out */
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 40px;
+    border-radius: 24px;
+    padding: 48px 40px;
     text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle accent line on top of the right box */
+.af-right-col::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #3b82f6, #ec4899, #eab308);
 }
 
 .af-cooking {
-    font-size: 64px;
+    font-size: 72px;
     display: inline-block;
     margin-bottom: 16px;
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 .af-message {
-    font-size: 24px;
-    font-weight: 800;
+    font-size: 28px;
+    font-weight: 900;
     color: var(--text-main);
+    letter-spacing: -0.5px;
 }
 
 .af-sub {
@@ -218,39 +258,52 @@ body::before {
 
 /* Status Grid */
 .af-status {
-    margin-top: 32px;
+    margin-top: 40px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 16px;
 }
 
 .af-box {
-    background: var(--card-bg);
+    background: #f8fafc;
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s;
 }
+
+.af-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+
+/* Adding colorful important accents to the boxes */
+.af-box:nth-child(1) { border-bottom: 3px solid #3b82f6; } /* Blue for Speed */
+.af-box:nth-child(2) { border-bottom: 3px solid #ec4899; } /* Pink for UI */
+.af-box:nth-child(3) { border-bottom: 3px solid #eab308; } /* Yellow for Test */
+.af-box:nth-child(4) { border-bottom: 3px solid #22c55e; } /* Green for Launch */
 
 .af-box-title {
     color: var(--text-main);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 14px;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 .af-box-text {
     color: var(--text-muted);
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 .af-footer {
     grid-column: 1 / -1;
-    margin-top: 30px;
+    margin-top: 20px;
     text-align: center;
-    color: #64748b;
+    color: #94a3b8;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
 }
 </style>
 </head>
@@ -273,52 +326,50 @@ body::before {
         
         <div class="af-left-col">
             <div class="af-badge">
-                <span>⚙️</span> Platform Update
+                <span class="gear-icon">⚙️</span> Scheduled "Feature" Injection
             </div>
 
             <h1 class="af-title">
                 We're <span class="af-highlight">Cooking</span> 🔥<br>
-                Something Better.
+                (But the kitchen is on fire).
             </h1>
 
             <p class="af-desc">
-                The next version of AcademeForge is currently under development. 
-                We're refining the experience, optimizing performance, and preparing 
-                something truly worth the wait.
+                The next version of AcademeForge is held together by duct tape, hope, and an unhealthy amount of caffeine. We are busy deleting old bugs just to introduce much cooler, shinier new ones.
             </p>
         </div>
 
         <div class="af-right-col">
-            <div class="af-cooking">👨‍🍳</div>
+            <div class="af-cooking">🫠</div>
             
-            <div class="af-message">Not ready yet.</div>
+            <div class="af-message">Please stand by.</div>
             
             <div class="af-sub">
-                Our developers are arguing with bugs, optimizing code, and pretending everything is under control.
+                Our developers are aggressively refreshing Stack Overflow, blaming the browser cache, and questioning their life choices. Everything is perfectly normal.
             </div>
 
             <div class="af-status">
                 <div class="af-box">
                     <div class="af-box-title">⚡ Speed</div>
-                    <div class="af-box-text">Accelerating</div>
+                    <div class="af-box-text">"Works on my machine"</div>
                 </div>
                 <div class="af-box">
                     <div class="af-box-title">🎨 UI/UX</div>
-                    <div class="af-box-text">Refining</div>
+                    <div class="af-box-text">Adding more shadows</div>
                 </div>
                 <div class="af-box">
                     <div class="af-box-title">🧪 Testing</div>
-                    <div class="af-box-text">In Progress</div>
+                    <div class="af-box-text">We test in Production</div>
                 </div>
                 <div class="af-box">
                     <div class="af-box-title">🚀 Launch</div>
-                    <div class="af-box-text">Pending</div>
+                    <div class="af-box-text">Sometime this century</div>
                 </div>
             </div>
         </div>
 
         <div class="af-footer">
-            © AcademeForge 2026 • Learning Beyond The Classroom
+            © AcademeForge 2026 • Learning patience while we fix this mess.
         </div>
 
     </div>
