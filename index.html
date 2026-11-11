@@ -7,17 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" type="image/jpeg" href="AF LOGO 2.jpeg">
 
-<!--
-  NOTE: the global stylesheet (style.min.css) is intentionally NOT linked here.
-  A normal <link> would apply its rules to the whole page. It is fetched by the
-  loader script at the bottom and every selector is re-scoped to .af-global
-  (the header + footer mounts only), so it cannot touch the page content.
--->
-
 <style>
-/* ==========================================
-   1. BASE (page-only styles)
-   ========================================== */
+
 :root {
     --bg-main: #fcf8f3;
     --card-bg: #ffffff;
@@ -26,7 +17,6 @@
     --text-muted: #475569;
 }
 
-/* Reset is limited to the page content so it never leaks into header/footer */
 .main-wrapper,
 .main-wrapper * {
     margin: 0;
@@ -47,7 +37,6 @@ body {
     position: relative;
 }
 
-/* Subtle grid background pattern */
 body::before {
     content: '';
     position: fixed;
@@ -60,12 +49,6 @@ body::before {
     pointer-events: none;
 }
 
-/* ==========================================
-   2. HEADER / FOOTER MOUNTS
-   .af-global = the only place the remote CSS may apply.
-   `all: initial` stops the page's body styles (font, colour...) from
-   leaking into the header/footer; the scoped remote CSS then styles them.
-   ========================================== */
 .af-global {
     all: initial;
     display: block;
@@ -77,9 +60,6 @@ body::before {
     z-index: 1000;
 }
 
-/* ==========================================
-   3. LAYOUT
-   ========================================== */
 .main-wrapper {
     flex: 1;
     display: flex;
@@ -106,9 +86,6 @@ body::before {
     }
 }
 
-/* ==========================================
-   4. TYPOGRAPHY & ELEMENTS
-   ========================================== */
 .af-badge {
     display: inline-flex;
     padding: 8px 16px;
@@ -163,9 +140,6 @@ body::before {
     .af-desc { margin: 0 auto; }
 }
 
-/* ==========================================
-   5. RIGHT COLUMN
-   ========================================== */
 .af-right-col {
     background: #ffffff;
     border: 1px solid var(--border);
@@ -264,7 +238,6 @@ body::before {
 </head>
 <body>
 
-<!-- Header mount (filled from academeforge.in/global/header.html) -->
 <div id="site-header" class="af-global"></div>
 
 <main class="main-wrapper">
@@ -321,17 +294,8 @@ body::before {
     </div>
 </main>
 
-<!-- Footer mount (filled from academeforge.in/global/footer.html) -->
 <div id="site-footer" class="af-global"></div>
 
-<!-- =========================================================
-     Scoped global-CSS loader
-     1. fetches academeforge.in's style.min.css
-     2. rewrites relative url(...) to absolute
-     3. prefixes every selector with .af-global (header/footer only);
-        html/body/:root rules are mapped onto .af-global
-     4. fixes relative links/images in the injected header/footer
-     ========================================================= -->
 <script>
 (function () {
   var ORIGIN    = "https://academeforge.in";
@@ -339,7 +303,6 @@ body::before {
   var FRAG_BASE = ORIGIN + "/global/";
   var SCOPE     = ".af-global";
 
-  /* split "a, b:not(c,d)" on top-level commas only */
   function splitTop(s) {
     var out = [], depth = 0, cur = "";
     for (var i = 0; i < s.length; i++) {
@@ -361,13 +324,13 @@ body::before {
     var m = sel.match(/^(html|body|:root)(?![\w-])([\s\S]*)$/i);
     if (m) {
       var head = m[1], rest = m[2];
-      /* e.g. html[data-theme="dark"] .x  ->  html[data-theme="dark"] .af-global .x */
+
       if (/^[\[.:#]/.test(rest)) {
         var compound = rest.match(/^[^\s>+~]*/)[0];
         var after = rest.slice(compound.length).trim();
         return head + compound + " " + SCOPE + (after ? " " + after : "");
       }
-      /* plain html / body / :root (+ optional descendants) -> the mount itself */
+
       rest = rest.trim().replace(/^[>+~]\s*/, "").replace(/^body(?![\w-])\s*/i, "");
       return rest ? SCOPE + " " + rest : SCOPE;
     }
@@ -380,9 +343,9 @@ body::before {
       if (r instanceof CSSStyleRule) {
         try {
           r.selectorText = splitTop(r.selectorText).map(scopeOne).join(",");
-        } catch (e) { /* leave rule untouched if the browser rejects it */ }
+        } catch (e) {  }
       } else if (r.cssRules && !(r instanceof CSSKeyframesRule)) {
-        scopeRules(r.cssRules);               /* @media, @supports, @layer ... */
+        scopeRules(r.cssRules);
       }
     }
   }
@@ -402,7 +365,7 @@ body::before {
 
         var style = document.createElement("style");
         style.id = "af-global-css";
-        style.media = "not all";               /* inactive until scoped -> no flash on the page */
+        style.media = "not all";
         style.textContent = css;
         document.head.appendChild(style);
 
@@ -412,7 +375,6 @@ body::before {
       .catch(function (err) { console.error("[AF] global CSS not applied:", err); });
   }
 
-  /* header.html / footer.html may use relative paths; make them absolute */
   var SKIP = /^(#|mailto:|tel:|javascript:|data:|https?:|\/\/)/i;
   function fixUrls(root) {
     root.querySelectorAll("[src],[href],[poster]").forEach(function (el) {
@@ -434,10 +396,8 @@ body::before {
 })();
 </script>
 
-<!-- Supabase is loaded before include.js because the site scripts may rely on it -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- include.js fetches /global/header.html + /global/footer.html into #site-header / #site-footer,
-     then loads the site's own JS (theme, lang, script.min.js, ...). -->
+
 <script src="https://academeforge.in/assets/js/include.js?v=3.0" defer></script>
 </body>
 </html>
