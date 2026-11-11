@@ -6,35 +6,43 @@
 <title>AcademeForge • We're Cooking (Bugs)</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" type="image/jpeg" href="AF LOGO 2.jpeg">
-   <link rel="stylesheet" href="https://academeforge.in/assets/css/style.min.css?v=6.0" />
+
+<!--
+  NOTE: the global stylesheet (style.min.css) is intentionally NOT linked here.
+  A normal <link> would apply its rules to the whole page. It is fetched by the
+  loader script at the bottom and every selector is re-scoped to .af-global
+  (the header + footer mounts only), so it cannot touch the page content.
+-->
+
 <style>
 /* ==========================================
-   1. BASE & RESET
+   1. BASE (page-only styles)
    ========================================== */
-* {
+:root {
+    --bg-main: #fcf8f3;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+}
+
+/* Reset is limited to the page content so it never leaks into header/footer */
+.main-wrapper,
+.main-wrapper * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root {
-    --bg-main: #fcf8f3; /* Light cream background */
-    --card-bg: #ffffff;
-    --border: #e2e8f0;
-    --text-main: #0f172a; 
-    --text-muted: #475569;
-    --btn-bg: #0f172a;
-    --btn-text: #ffffff;
-}
-
 body {
+    margin: 0;
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-main);
     color: var(--text-main);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     overflow-x: hidden;
     position: relative;
 }
@@ -44,7 +52,7 @@ body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: 
+    background-image:
         linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
@@ -53,68 +61,24 @@ body::before {
 }
 
 /* ==========================================
-   2. HEADER
+   2. HEADER / FOOTER MOUNTS
+   .af-global = the only place the remote CSS may apply.
+   `all: initial` stops the page's body styles (font, colour...) from
+   leaking into the header/footer; the scoped remote CSS then styles them.
    ========================================== */
-.main-header {
+.af-global {
+    all: initial;
+    display: block;
     width: 100%;
-    padding: 16px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff; /* White background as requested */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Added slight shadow for depth */
+}
+#site-header {
     position: sticky;
     top: 0;
-    z-index: 100;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.header-logo {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.header-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.header-title {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--text-main);
-    letter-spacing: -0.5px;
-}
-
-.website-btn {
-    background-color: var(--btn-bg);
-    color: var(--btn-text);
-    text-decoration: none;
-    padding: 10px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
-}
-
-.website-btn:hover {
-    background-color: #1e293b;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.3);
+    z-index: 1000;
 }
 
 /* ==========================================
-   3. RESPONSIVE GRID LAYOUT 
+   3. LAYOUT
    ========================================== */
 .main-wrapper {
     flex: 1;
@@ -128,9 +92,6 @@ body::before {
 .af-container {
     width: 100%;
     max-width: 1100px;
-    background: transparent; /* Made completely transparent */
-    /* Removed border and box-shadow */
-    
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     gap: 60px;
@@ -138,9 +99,6 @@ body::before {
 }
 
 @media (max-width: 960px) {
-    .main-header {
-        padding: 16px 20px;
-    }
     .af-container {
         grid-template-columns: 1fr;
         gap: 50px;
@@ -155,8 +113,8 @@ body::before {
     display: inline-flex;
     padding: 8px 16px;
     border-radius: 99px;
-    background: #ffedd5; /* Warm orange bg */
-    color: #c2410c; /* Dark orange text */
+    background: #ffedd5;
+    color: #c2410c;
     font-size: 14px;
     font-weight: 700;
     border: 1px solid #fdba74;
@@ -166,16 +124,15 @@ body::before {
     box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
 }
 
-/* Cycle tyre spinning animation */
 .gear-icon {
     display: inline-block;
     font-size: 16px;
-    animation: spin-tire 2s linear infinite;
+    animation: af-page-spin 2s linear infinite;
     transform-origin: center center;
 }
 
-@keyframes spin-tire {
-    0% { transform: rotate(0deg); }
+@keyframes af-page-spin {
+    0%   { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
@@ -187,10 +144,10 @@ body::before {
     margin-bottom: 24px;
 }
 
-/* Gradient highlight for the text */
 .af-highlight {
     background: linear-gradient(90deg, #ea580c, #dc2626);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
 }
@@ -207,10 +164,10 @@ body::before {
 }
 
 /* ==========================================
-   5. RIGHT COLUMN (GRAPHICS & STATUS)
+   5. RIGHT COLUMN
    ========================================== */
 .af-right-col {
-    background: #ffffff; /* Keeping the box itself white so it stands out */
+    background: #ffffff;
     border: 1px solid var(--border);
     border-radius: 24px;
     padding: 48px 40px;
@@ -220,7 +177,6 @@ body::before {
     overflow: hidden;
 }
 
-/* Subtle accent line on top of the right box */
 .af-right-col::before {
     content: '';
     position: absolute;
@@ -235,12 +191,12 @@ body::before {
     font-size: 72px;
     display: inline-block;
     margin-bottom: 16px;
-    animation: floating 3s ease-in-out infinite;
+    animation: af-page-float 3s ease-in-out infinite;
 }
 
-@keyframes floating {
+@keyframes af-page-float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50%      { transform: translateY(-10px); }
 }
 
 .af-message {
@@ -257,7 +213,6 @@ body::before {
     line-height: 1.6;
 }
 
-/* Status Grid */
 .af-status {
     margin-top: 40px;
     display: grid;
@@ -279,11 +234,10 @@ body::before {
     box-shadow: 0 8px 16px rgba(0,0,0,0.05);
 }
 
-/* Adding colorful important accents to the boxes */
-.af-box:nth-child(1) { border-bottom: 3px solid #3b82f6; } /* Blue for Speed */
-.af-box:nth-child(2) { border-bottom: 3px solid #ec4899; } /* Pink for UI */
-.af-box:nth-child(3) { border-bottom: 3px solid #eab308; } /* Yellow for Test */
-.af-box:nth-child(4) { border-bottom: 3px solid #22c55e; } /* Green for Launch */
+.af-box:nth-child(1) { border-bottom: 3px solid #3b82f6; }
+.af-box:nth-child(2) { border-bottom: 3px solid #ec4899; }
+.af-box:nth-child(3) { border-bottom: 3px solid #eab308; }
+.af-box:nth-child(4) { border-bottom: 3px solid #22c55e; }
 
 .af-box-title {
     color: var(--text-main);
@@ -310,14 +264,12 @@ body::before {
 </head>
 <body>
 
-<!-- =========================================================
-       NAVIGATION
-  ========================================================= -->
-  <div id="site-header"></div>
+<!-- Header mount (filled from academeforge.in/global/header.html) -->
+<div id="site-header" class="af-global"></div>
 
-<div class="main-wrapper">
+<main class="main-wrapper">
     <div class="af-container">
-        
+
         <div class="af-left-col">
             <div class="af-badge">
                 <span class="gear-icon">⚙️</span> Scheduled "Feature" Injection
@@ -335,9 +287,9 @@ body::before {
 
         <div class="af-right-col">
             <div class="af-cooking">🫠</div>
-            
+
             <div class="af-message">Please stand by.</div>
-            
+
             <div class="af-sub">
                 Our developers are aggressively refreshing Stack Overflow, blaming the browser cache, and questioning their life choices. Everything is perfectly normal.
             </div>
@@ -361,19 +313,131 @@ body::before {
                 </div>
             </div>
         </div>
-<!-- =========================================================
-       FOOTER
-  ========================================================= -->
-  <div id="site-footer"></div>
-       
+
         <div class="af-footer">
             © AcademeForge 2026 • Learning patience while we fix this mess.
         </div>
 
     </div>
-</div>
+</main>
+
+<!-- Footer mount (filled from academeforge.in/global/footer.html) -->
+<div id="site-footer" class="af-global"></div>
+
+<!-- =========================================================
+     Scoped global-CSS loader
+     1. fetches academeforge.in's style.min.css
+     2. rewrites relative url(...) to absolute
+     3. prefixes every selector with .af-global (header/footer only);
+        html/body/:root rules are mapped onto .af-global
+     4. fixes relative links/images in the injected header/footer
+     ========================================================= -->
+<script>
+(function () {
+  var ORIGIN    = "https://academeforge.in";
+  var CSS_URL   = ORIGIN + "/assets/css/style.min.css?v=6.0";
+  var FRAG_BASE = ORIGIN + "/global/";
+  var SCOPE     = ".af-global";
+
+  /* split "a, b:not(c,d)" on top-level commas only */
+  function splitTop(s) {
+    var out = [], depth = 0, cur = "";
+    for (var i = 0; i < s.length; i++) {
+      var c = s[i];
+      if (c === "(" || c === "[") depth++;
+      else if (c === ")" || c === "]") depth--;
+      if (c === "," && depth === 0) { out.push(cur); cur = ""; }
+      else cur += c;
+    }
+    if (cur.trim()) out.push(cur);
+    return out;
+  }
+
+  function scopeOne(sel) {
+    sel = sel.trim();
+    if (!sel) return sel;
+    if (sel === "*") return SCOPE + "," + SCOPE + " *";
+
+    var m = sel.match(/^(html|body|:root)(?![\w-])([\s\S]*)$/i);
+    if (m) {
+      var head = m[1], rest = m[2];
+      /* e.g. html[data-theme="dark"] .x  ->  html[data-theme="dark"] .af-global .x */
+      if (/^[\[.:#]/.test(rest)) {
+        var compound = rest.match(/^[^\s>+~]*/)[0];
+        var after = rest.slice(compound.length).trim();
+        return head + compound + " " + SCOPE + (after ? " " + after : "");
+      }
+      /* plain html / body / :root (+ optional descendants) -> the mount itself */
+      rest = rest.trim().replace(/^[>+~]\s*/, "").replace(/^body(?![\w-])\s*/i, "");
+      return rest ? SCOPE + " " + rest : SCOPE;
+    }
+    return SCOPE + " " + sel;
+  }
+
+  function scopeRules(rules) {
+    for (var i = 0; i < rules.length; i++) {
+      var r = rules[i];
+      if (r instanceof CSSStyleRule) {
+        try {
+          r.selectorText = splitTop(r.selectorText).map(scopeOne).join(",");
+        } catch (e) { /* leave rule untouched if the browser rejects it */ }
+      } else if (r.cssRules && !(r instanceof CSSKeyframesRule)) {
+        scopeRules(r.cssRules);               /* @media, @supports, @layer ... */
+      }
+    }
+  }
+
+  function loadScopedCss() {
+    fetch(CSS_URL)
+      .then(function (res) {
+        if (!res.ok) throw new Error("Failed to load " + CSS_URL);
+        return res.text();
+      })
+      .then(function (css) {
+        css = css.replace(/@import[^;]+;/gi, "");
+        css = css.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/gi, function (m, q, u) {
+          if (/^(data:|https?:|\/\/|#)/i.test(u)) return m;
+          try { return 'url("' + new URL(u, CSS_URL).href + '")'; } catch (e) { return m; }
+        });
+
+        var style = document.createElement("style");
+        style.id = "af-global-css";
+        style.media = "not all";               /* inactive until scoped -> no flash on the page */
+        style.textContent = css;
+        document.head.appendChild(style);
+
+        scopeRules(style.sheet.cssRules);
+        style.media = "all";
+      })
+      .catch(function (err) { console.error("[AF] global CSS not applied:", err); });
+  }
+
+  /* header.html / footer.html may use relative paths; make them absolute */
+  var SKIP = /^(#|mailto:|tel:|javascript:|data:|https?:|\/\/)/i;
+  function fixUrls(root) {
+    root.querySelectorAll("[src],[href],[poster]").forEach(function (el) {
+      ["src", "href", "poster"].forEach(function (a) {
+        var v = el.getAttribute(a);
+        if (!v || SKIP.test(v)) return;
+        try { el.setAttribute(a, new URL(v, FRAG_BASE).href); } catch (e) {}
+      });
+    });
+  }
+  ["site-header", "site-footer"].forEach(function (id) {
+    var mount = document.getElementById(id);
+    if (!mount) return;
+    new MutationObserver(function () { fixUrls(mount); })
+      .observe(mount, { childList: true, subtree: true });
+  });
+
+  loadScopedCss();
+})();
+</script>
+
+<!-- Supabase is loaded before include.js because the site scripts may rely on it -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="script.min.js?v=6.0" defer></script>
-  <script src="https://academeforge.in/assets/js/include.js?v=3.0" defer></script>
+<!-- include.js fetches /global/header.html + /global/footer.html into #site-header / #site-footer,
+     then loads the site's own JS (theme, lang, script.min.js, ...). -->
+<script src="https://academeforge.in/assets/js/include.js?v=3.0" defer></script>
 </body>
 </html>
