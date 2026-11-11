@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,6 +53,10 @@ body::before {
     all: initial;
     display: block;
     width: 100%;
+}
+#site-header,
+#site-footer {
+    overflow: visible;
 }
 #site-header {
     position: sticky;
@@ -320,6 +324,12 @@ body::before {
     sel = sel.trim();
     if (!sel) return sel;
     if (sel === "*") return SCOPE + "," + SCOPE + " *";
+
+    var t = sel.match(/^(\[data-theme[^\]]*\])([\s\S]*)$/);
+    if (t) {
+      var tAfter = t[2].trim();
+      return t[1] + " " + SCOPE + (tAfter ? " " + tAfter : "");
+    }
 
     var m = sel.match(/^(html|body|:root)(?![\w-])([\s\S]*)$/i);
     if (m) {
