@@ -39,6 +39,12 @@
 
     .dl-main { background: var(--dl-bg); color: var(--dl-text); font-family: Inter, system-ui, sans-serif; padding: 3rem 1.25rem 4rem; }
     .dl-wrap { max-width: 640px; margin: 0 auto; }
+    .dl-wrap > * + * { margin-top: 1.5rem; }
+    @media (min-width: 900px) {
+      .dl-wrap { max-width: 1040px; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+      .dl-wrap > * + * { margin-top: 0; }
+      .dl-card, .dl-steps { height: 100%; }
+    }
 
     .dl-card {
       background: var(--dl-surface); border: 1px solid var(--dl-border);
@@ -58,6 +64,8 @@
     .dl-btn:hover { background: var(--dl-green-dark); }
     .dl-btn:focus-visible { outline: 3px solid var(--dl-green-ink); outline-offset: 3px; }
     .dl-btn svg { flex: none; }
+    .dl-btn.is-locked,
+    .dl-btn.is-locked:hover { background: var(--dl-border); color: var(--dl-muted); cursor: not-allowed; }
 
     .dl-meta { margin: 0.9rem 0 0; font-size: 0.85rem; color: var(--dl-muted); }
     .dl-note {
@@ -67,8 +75,8 @@
     }
     .dl-note.show { display: block; }
 
-    .dl-steps { margin-top: 1.5rem; background: var(--dl-surface); border: 1px solid var(--dl-border); border-radius: 16px; padding: 1.5rem 1.75rem; }
-    .dl-steps h2 { font-family: Manrope, Inter, sans-serif; font-size: 1.15rem; margin: 0 0 0.9rem; }
+    .dl-steps { background: var(--dl-surface); border: 1px solid var(--dl-border); border-radius: 16px; padding: 2rem 1.75rem; }
+    .dl-steps h2 { font-family: Manrope, Inter, sans-serif; font-size: 1.25rem; margin: 0 0 1rem; }
     .dl-steps ol { margin: 0; padding-left: 1.25rem; color: var(--dl-muted); line-height: 1.7; }
     .dl-steps li + li { margin-top: 0.35rem; }
     .dl-steps strong { color: var(--dl-text); }
@@ -77,11 +85,8 @@
 </head>
 <body>
 
- 
-<!-- =========================================================
-       NAVIGATION
-  ========================================================= -->
   <div id="site-header"></div>
+
   <main class="dl-main">
     <div class="dl-wrap">
 
@@ -91,12 +96,12 @@
         <p class="dl-lead">Install AcademeForge on your Android phone and keep learning wherever you are.</p>
 
         <a id="installBtn" class="dl-btn" href="academeforge.apk" download="academeforge.apk">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
-          Install App
+          <span id="btnIcon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg></span>
+          <span id="btnLabel">Install App</span>
         </a>
 
         <p class="dl-meta" id="dlMeta">Android APK</p>
-        <p class="dl-note" id="dlNote">You're not on an Android device. Open this page on your Android phone to install the app.</p>
+        <p class="dl-note" id="dlNote">Installation is locked on this device. Open this page on your Android phone to install the app.</p>
       </section>
 
       <section class="dl-steps" aria-labelledby="stepsTitle">
@@ -113,23 +118,34 @@
     </div>
   </main>
 
-<!-- =========================================================
-       FOOTER
-  ========================================================= -->
   <div id="site-footer"></div>
 
   <script>
     (function () {
+      var APK = 'academeforge.apk';
       var btn = document.getElementById('installBtn');
       var meta = document.getElementById('dlMeta');
 
-      // Show a hint on non-Android devices (the link still works for saving the file)
-      if (!/android/i.test(navigator.userAgent)) {
+      var isAndroid = /android/i.test(navigator.userAgent) ||
+        (navigator.userAgentData && navigator.userAgentData.platform === 'Android');
+
+      if (!isAndroid) {
+        // Lock the button on every non-Android device
+        btn.removeAttribute('href');
+        btn.removeAttribute('download');
+        btn.setAttribute('role', 'button');
+        btn.setAttribute('aria-disabled', 'true');
+        btn.setAttribute('tabindex', '-1');
+        btn.classList.add('is-locked');
+        btn.addEventListener('click', function (e) { e.preventDefault(); });
+        document.getElementById('btnLabel').textContent = 'Available on Android only';
+        document.getElementById('btnIcon').innerHTML =
+          '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
         document.getElementById('dlNote').classList.add('show');
       }
 
       // Show the file size if the server reports it
-      fetch(btn.href, { method: 'HEAD' }).then(function (r) {
+      fetch(APK, { method: 'HEAD' }).then(function (r) {
         var n = parseInt(r.headers.get('content-length'), 10);
         if (r.ok && n) meta.textContent = 'Android APK · ' + (n / 1048576).toFixed(1) + ' MB';
       }).catch(function () {});
