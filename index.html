@@ -1,406 +1,134 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AcademeForge Download Center</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-/* =========================
-   RESET
-========================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-    --primary:#4f46e5;
-    --primary-dark:#3730a3;
-    --accent:#06b6d4;
-    --bg:#eef2ff;
-    --card:#ffffff;
-    --text:#111827;
-    --muted:#6b7280;
-    --success:#22c55e;
-}
-
-body{
-    font-family:'Nunito',sans-serif;
-    min-height:100vh;
-    background:
-    radial-gradient(circle at top right,#c7d2fe,transparent 30%),
-    radial-gradient(circle at bottom left,#a5f3fc,transparent 35%),
-    var(--bg);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-}
-
-.af-container{
-    width:100%;
-    max-width:420px;
-}
-
-.af-card{
-    background:var(--card);
-    border-radius:30px;
-    overflow:hidden;
-
-    box-shadow:
-    0 25px 70px rgba(0,0,0,.15);
-}
-
-/* =========================
-   HERO
-========================= */
-
-.af-hero{
-    text-align:center;
-    padding:35px 25px;
-
-    background:
-    radial-gradient(circle at top right,
-    rgba(255,255,255,.20),
-    transparent 40%),
-
-    linear-gradient(
-    135deg,
-    var(--primary),
-    var(--accent)
-    );
-}
-
-.af-logo{
-    width:90px;
-    height:90px;
-
-    margin:auto;
-
-    border-radius:24px;
-
-    background:rgba(255,255,255,.15);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    color:#fff;
-    font-size:34px;
-    font-weight:900;
-    font-family:'Sora',sans-serif;
-}
-
-.af-title{
-    margin-top:16px;
-    color:white;
-    font-family:'Sora',sans-serif;
-    font-size:28px;
-    font-weight:800;
-}
-
-.af-tagline{
-    color:rgba(255,255,255,.9);
-    margin-top:8px;
-    font-size:14px;
-}
-
-/* =========================
-   BODY
-========================= */
-
-.af-body{
-    padding:25px;
-}
-
-.af-version{
-    text-align:center;
-    font-size:24px;
-    font-weight:900;
-    color:var(--text);
-}
-
-.af-badge{
-    width:max-content;
-
-    margin:10px auto 0;
-
-    padding:7px 14px;
-
-    border-radius:999px;
-
-    background:rgba(34,197,94,.10);
-
-    color:var(--success);
-
-    font-size:12px;
-    font-weight:800;
-}
-
-.af-desc{
-    text-align:center;
-    margin-top:18px;
-    color:var(--muted);
-    line-height:1.7;
-}
-
-.af-section{
-    margin-top:28px;
-}
-
-.af-section-title{
-    font-size:15px;
-    font-weight:800;
-    margin-bottom:14px;
-}
-
-.af-feature{
-    display:flex;
-    gap:10px;
-    margin-bottom:12px;
-}
-
-.af-feature span{
-    color:var(--success);
-    font-weight:900;
-}
-
-/* =========================
-   BUTTON
-========================= */
-
-.af-download-btn{
-    display:block;
-    width:100%;
-
-    text-align:center;
-    text-decoration:none;
-
-    margin-top:28px;
-
-    padding:16px;
-
-    border-radius:18px;
-
-    background:linear-gradient(
-    135deg,
-    var(--primary),
-    var(--primary-dark)
-    );
-
-    color:white;
-
-    font-size:16px;
-    font-weight:800;
-
-    transition:.25s;
-}
-
-.af-download-btn:hover{
-    transform:translateY(-2px);
-}
-
-/* =========================
-   INFO BOX
-========================= */
-
-.af-info{
-    margin-top:20px;
-
-    background:#f8fafc;
-
-    border-radius:18px;
-
-    padding:16px;
-}
-
-.af-row{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:10px;
-}
-
-.af-row:last-child{
-    margin-bottom:0;
-}
-
-.af-label{
-    color:var(--muted);
-}
-
-.af-value{
-    color:var(--text);
-    font-weight:700;
-}
-
-.af-secure{
-    margin-top:15px;
-    text-align:center;
-    color:var(--success);
-    font-weight:800;
-}
-
-.af-footer{
-    margin-top:18px;
-    text-align:center;
-    color:var(--muted);
-    font-size:12px;
-}
-.af-logo{
-    width:90px;
-    height:90px;
-
-    margin:auto;
-
-    border-radius:24px;
-
-    background:rgba(255,255,255,.15);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    overflow:hidden;
-}
-
-.af-logo-img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:24px;
-    display:block;
-}
-</style>
+<script>(()=>{var v=localStorage.getItem("af_dark_mode");var isDark;if(v==="1")isDark=true;else if(v==="0")isDark=false;else isDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme",isDark?"dark":"light")})()</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#10b981" />
+  <meta name="description" content="Download the AcademeForge Android app and install it on your phone." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://academeforge.in/download/" />
+  <title>Download the App | AcademeForge</title>
+  <link rel="icon" type="image/png" href="https://academeforge.in/IMG/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://academeforge.in/assets/css/style.min.css?v=6.0" />
+
+  <style>
+    :root {
+      --dl-green: #10b981;
+      --dl-green-dark: #059669;
+      --dl-green-tint: #ecfdf5;
+      --dl-green-ink: #047857;
+      --dl-bg: #f8fafc;
+      --dl-surface: #ffffff;
+      --dl-border: #e2e8f0;
+      --dl-text: #0f172a;
+      --dl-muted: #64748b;
+    }
+    :root[data-theme="dark"] {
+      --dl-green-tint: #064e3b;
+      --dl-green-ink: #6ee7b7;
+      --dl-bg: #0f172a;
+      --dl-surface: #1e293b;
+      --dl-border: #334155;
+      --dl-text: #f1f5f9;
+      --dl-muted: #94a3b8;
+    }
+
+    .dl-main { background: var(--dl-bg); color: var(--dl-text); font-family: Inter, system-ui, sans-serif; padding: 3rem 1.25rem 4rem; }
+    .dl-wrap { max-width: 640px; margin: 0 auto; }
+
+    .dl-card {
+      background: var(--dl-surface); border: 1px solid var(--dl-border);
+      border-radius: 16px; padding: 2rem 1.75rem; text-align: center;
+    }
+    .dl-logo { width: 72px; height: 72px; border-radius: 16px; margin: 0 auto 1rem; display: block; }
+    .dl-card h1 { font-family: Manrope, Inter, sans-serif; font-size: clamp(1.6rem, 5vw, 2.1rem); font-weight: 800; margin: 0 0 0.5rem; }
+    .dl-lead { color: var(--dl-muted); line-height: 1.6; margin: 0 auto 1.5rem; max-width: 46ch; }
+
+    .dl-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      width: 100%; max-width: 360px; padding: 0.95rem 1.5rem;
+      background: var(--dl-green); color: #fff; border: 0; border-radius: 12px;
+      font: 700 1.05rem Inter, sans-serif; text-decoration: none; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .dl-btn:hover { background: var(--dl-green-dark); }
+    .dl-btn:focus-visible { outline: 3px solid var(--dl-green-ink); outline-offset: 3px; }
+    .dl-btn svg { flex: none; }
+
+    .dl-meta { margin: 0.9rem 0 0; font-size: 0.85rem; color: var(--dl-muted); }
+    .dl-note {
+      display: none; margin: 1rem auto 0; max-width: 46ch; padding: 0.7rem 0.9rem;
+      background: var(--dl-green-tint); color: var(--dl-green-ink);
+      border-radius: 10px; font-size: 0.85rem; line-height: 1.5;
+    }
+    .dl-note.show { display: block; }
+
+    .dl-steps { margin-top: 1.5rem; background: var(--dl-surface); border: 1px solid var(--dl-border); border-radius: 16px; padding: 1.5rem 1.75rem; }
+    .dl-steps h2 { font-family: Manrope, Inter, sans-serif; font-size: 1.15rem; margin: 0 0 0.9rem; }
+    .dl-steps ol { margin: 0; padding-left: 1.25rem; color: var(--dl-muted); line-height: 1.7; }
+    .dl-steps li + li { margin-top: 0.35rem; }
+    .dl-steps strong { color: var(--dl-text); }
+    .dl-tip { margin: 1rem 0 0; font-size: 0.85rem; color: var(--dl-muted); }
+  </style>
 </head>
-
 <body>
 
-<div class="af-container">
+  <div id="site-header"></div>
 
-<div class="af-card">
+  <main class="dl-main">
+    <div class="dl-wrap">
 
-<div class="af-hero">
+      <section class="dl-card">
+        <img class="dl-logo" src="https://academeforge.in/IMG/logo.png" alt="AcademeForge logo" />
+        <h1>Get the AcademeForge app</h1>
+        <p class="dl-lead">Install AcademeForge on your Android phone and keep learning wherever you are.</p>
 
-<div class="af-logo">
-    <img
-        src="/IMG/AF LOGO 2.jpeg"
-        alt="AcademeForge Logo"
-        class="af-logo-img"
-    >
-</div>
+        <a id="installBtn" class="dl-btn" href="academeforge.apk" download="academeforge.apk">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Install App
+        </a>
 
-<div class="af-title">
-AcademeForge
-</div>
+        <p class="dl-meta" id="dlMeta">Android APK</p>
+        <p class="dl-note" id="dlNote">You're not on an Android device. Open this page on your Android phone to install the app.</p>
+      </section>
 
-<div class="af-tagline">
-Learning Beyond The Classroom
-</div>
+      <section class="dl-steps" aria-labelledby="stepsTitle">
+        <h2 id="stepsTitle">How to install</h2>
+        <ol>
+          <li>Tap <strong>Install App</strong> to download <strong>academeforge.apk</strong>.</li>
+          <li>When the download finishes, open the file from your notification bar or the <strong>Downloads</strong> folder.</li>
+          <li>If Android blocks it, tap <strong>Settings</strong> and allow installs from your browser, then go back.</li>
+          <li>Tap <strong>Install</strong>, then <strong>Open</strong>.</li>
+        </ol>
+        <p class="dl-tip">Your browser may warn that this type of file can be harmful. That's a standard warning for any app installed outside the Play Store. Choose <strong>Download anyway</strong> or <strong>Keep</strong>.</p>
+      </section>
 
-</div>
+    </div>
+  </main>
 
-<div class="af-body">
+  <div id="site-footer"></div>
 
-<div class="af-version">
-Version 2.0.4
-</div>
+  <script>
+    (function () {
+      var btn = document.getElementById('installBtn');
+      var meta = document.getElementById('dlMeta');
 
-<div class="af-badge">
-Latest Stable Release
-</div>
+      // Show a hint on non-Android devices (the link still works for saving the file)
+      if (!/android/i.test(navigator.userAgent)) {
+        document.getElementById('dlNote').classList.add('show');
+      }
 
-<div class="af-desc">
-Download the latest version of AcademeForge and enjoy improved performance, bug fixes and a smoother learning experience.
-</div>
-
-<div class="af-section">
-
-<div class="af-section-title">
-What's New
-</div>
-
-<div class="af-feature"><span>✓</span> Faster Performance</div>
-<div class="af-feature"><span>✓</span> UI Improvements</div>
-<div class="af-feature"><span>✓</span> Bug Fixes</div>
-<div class="af-feature"><span>✓</span> Better Learning Experience</div>
-<div class="af-feature"><span>✓</span> Enhanced Navigation</div>
-
-</div>
-
-<a
-href="academeforge.apk"
-download
-class="af-download-btn"
-id="downloadBtn">
-
-⬇ Download AcademeForge v2.0.4
-
-</a>
-
-<div class="af-secure">
-🔒 Official & Secure Download
-</div>
-
-<div class="af-info">
-
-<div class="af-row">
-<div class="af-label">Version</div>
-<div class="af-value">2.0.4</div>
-</div>
-
-<div class="af-row">
-<div class="af-label">Platform</div>
-<div class="af-value">Android APK</div>
-</div>
-
-<div class="af-row">
-<div class="af-label">Developer</div>
-<div class="af-value">Devraj Kumar</div>
-</div>
-
-<div class="af-row">
-<div class="af-label">Status</div>
-<div class="af-value">Latest Release</div>
-</div>
-
-</div>
-
-<div class="af-footer">
-© AcademeForge • Learning Beyond The Classroom
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-/* =========================
-   JAVASCRIPT
-========================= */
-
-document
-.getElementById("downloadBtn")
-.addEventListener("click", function(){
-
-    console.log(
-    "AcademeForge v2.0.4 download started"
-    );
-
-});
-
-</script>
-
+      // Show the file size if the server reports it
+      fetch(btn.href, { method: 'HEAD' }).then(function (r) {
+        var n = parseInt(r.headers.get('content-length'), 10);
+        if (r.ok && n) meta.textContent = 'Android APK · ' + (n / 1048576).toFixed(1) + ' MB';
+      }).catch(function () {});
+    })();
+  </script>
+  <script src="https://academeforge.in/assets/js/include.js?v=3.0" defer></script>
 </body>
 </html>
