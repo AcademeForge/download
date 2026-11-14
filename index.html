@@ -1,413 +1,406 @@
+
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AcademeForge • We're Cooking (Bugs)</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="icon" type="image/jpeg" href="AF LOGO 2.jpeg">
+
+<title>AcademeForge Download Center</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
-:root {
-    --bg-main: #fcf8f3;
-    --card-bg: #ffffff;
-    --border: #e2e8f0;
-    --text-main: #0f172a;
-    --text-muted: #475569;
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.main-wrapper,
-.main-wrapper * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root{
+    --primary:#4f46e5;
+    --primary-dark:#3730a3;
+    --accent:#06b6d4;
+    --bg:#eef2ff;
+    --card:#ffffff;
+    --text:#111827;
+    --muted:#6b7280;
+    --success:#22c55e;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    overflow-x: hidden;
-    position: relative;
+body{
+    font-family:'Nunito',sans-serif;
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top right,#c7d2fe,transparent 30%),
+    radial-gradient(circle at bottom left,#a5f3fc,transparent 35%),
+    var(--bg);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    z-index: -1;
-    pointer-events: none;
+.af-container{
+    width:100%;
+    max-width:420px;
 }
 
-.af-global {
-    all: initial;
-    display: block;
-    width: 100%;
-}
-#site-header,
-#site-footer {
-    overflow: visible;
-}
-#site-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+.af-card{
+    background:var(--card);
+    border-radius:30px;
+    overflow:hidden;
+
+    box-shadow:
+    0 25px 70px rgba(0,0,0,.15);
 }
 
-.main-wrapper {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 40px 24px;
+/* =========================
+   HERO
+========================= */
+
+.af-hero{
+    text-align:center;
+    padding:35px 25px;
+
+    background:
+    radial-gradient(circle at top right,
+    rgba(255,255,255,.20),
+    transparent 40%),
+
+    linear-gradient(
+    135deg,
+    var(--primary),
+    var(--accent)
+    );
 }
 
-.af-container {
-    width: 100%;
-    max-width: 1100px;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 60px;
-    align-items: center;
+.af-logo{
+    width:90px;
+    height:90px;
+
+    margin:auto;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.15);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#fff;
+    font-size:34px;
+    font-weight:900;
+    font-family:'Sora',sans-serif;
 }
 
-@media (max-width: 960px) {
-    .af-container {
-        grid-template-columns: 1fr;
-        gap: 50px;
-        text-align: center;
-    }
+.af-title{
+    margin-top:16px;
+    color:white;
+    font-family:'Sora',sans-serif;
+    font-size:28px;
+    font-weight:800;
 }
 
-.af-badge {
-    display: inline-flex;
-    padding: 8px 16px;
-    border-radius: 99px;
-    background: #ffedd5;
-    color: #c2410c;
-    font-size: 14px;
-    font-weight: 700;
-    border: 1px solid #fdba74;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+.af-tagline{
+    color:rgba(255,255,255,.9);
+    margin-top:8px;
+    font-size:14px;
 }
 
-.gear-icon {
-    display: inline-block;
-    font-size: 16px;
-    animation: af-page-spin 2s linear infinite;
-    transform-origin: center center;
+/* =========================
+   BODY
+========================= */
+
+.af-body{
+    padding:25px;
 }
 
-@keyframes af-page-spin {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.af-version{
+    text-align:center;
+    font-size:24px;
+    font-weight:900;
+    color:var(--text);
 }
 
-.af-title {
-    font-size: clamp(40px, 5vw, 60px);
-    font-weight: 900;
-    line-height: 1.15;
-    letter-spacing: -1.5px;
-    margin-bottom: 24px;
+.af-badge{
+    width:max-content;
+
+    margin:10px auto 0;
+
+    padding:7px 14px;
+
+    border-radius:999px;
+
+    background:rgba(34,197,94,.10);
+
+    color:var(--success);
+
+    font-size:12px;
+    font-weight:800;
 }
 
-.af-highlight {
-    background: linear-gradient(90deg, #ea580c, #dc2626);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
+.af-desc{
+    text-align:center;
+    margin-top:18px;
+    color:var(--muted);
+    line-height:1.7;
 }
 
-.af-desc {
-    color: var(--text-muted);
-    font-size: 18px;
-    line-height: 1.7;
-    max-width: 500px;
+.af-section{
+    margin-top:28px;
 }
 
-@media (max-width: 960px) {
-    .af-desc { margin: 0 auto; }
+.af-section-title{
+    font-size:15px;
+    font-weight:800;
+    margin-bottom:14px;
 }
 
-.af-right-col {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 48px 40px;
-    text-align: center;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-    position: relative;
-    overflow: hidden;
+.af-feature{
+    display:flex;
+    gap:10px;
+    margin-bottom:12px;
 }
 
-.af-right-col::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, #3b82f6, #ec4899, #eab308);
+.af-feature span{
+    color:var(--success);
+    font-weight:900;
 }
 
-.af-cooking {
-    font-size: 72px;
-    display: inline-block;
-    margin-bottom: 16px;
-    animation: af-page-float 3s ease-in-out infinite;
+/* =========================
+   BUTTON
+========================= */
+
+.af-download-btn{
+    display:block;
+    width:100%;
+
+    text-align:center;
+    text-decoration:none;
+
+    margin-top:28px;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+    );
+
+    color:white;
+
+    font-size:16px;
+    font-weight:800;
+
+    transition:.25s;
 }
 
-@keyframes af-page-float {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-10px); }
+.af-download-btn:hover{
+    transform:translateY(-2px);
 }
 
-.af-message {
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--text-main);
-    letter-spacing: -0.5px;
+/* =========================
+   INFO BOX
+========================= */
+
+.af-info{
+    margin-top:20px;
+
+    background:#f8fafc;
+
+    border-radius:18px;
+
+    padding:16px;
 }
 
-.af-sub {
-    margin-top: 12px;
-    color: var(--text-muted);
-    font-size: 15px;
-    line-height: 1.6;
+.af-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
 }
 
-.af-status {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 16px;
+.af-row:last-child{
+    margin-bottom:0;
 }
 
-.af-box {
-    background: #f8fafc;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    transition: transform 0.2s;
+.af-label{
+    color:var(--muted);
 }
 
-.af-box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+.af-value{
+    color:var(--text);
+    font-weight:700;
 }
 
-.af-box:nth-child(1) { border-bottom: 3px solid #3b82f6; }
-.af-box:nth-child(2) { border-bottom: 3px solid #ec4899; }
-.af-box:nth-child(3) { border-bottom: 3px solid #eab308; }
-.af-box:nth-child(4) { border-bottom: 3px solid #22c55e; }
-
-.af-box-title {
-    color: var(--text-main);
-    font-weight: 800;
-    font-size: 14px;
-    margin-bottom: 6px;
+.af-secure{
+    margin-top:15px;
+    text-align:center;
+    color:var(--success);
+    font-weight:800;
 }
 
-.af-box-text {
-    color: var(--text-muted);
-    font-size: 13px;
-    font-weight: 500;
+.af-footer{
+    margin-top:18px;
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+}
+.af-logo{
+    width:90px;
+    height:90px;
+
+    margin:auto;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.15);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
 }
 
-.af-footer {
-    grid-column: 1 / -1;
-    margin-top: 20px;
-    text-align: center;
-    color: #94a3b8;
-    font-size: 14px;
-    font-weight: 600;
+.af-logo-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:24px;
+    display:block;
 }
 </style>
 </head>
+
 <body>
 
-<div id="site-header" class="af-global"></div>
+<div class="af-container">
 
-<main class="main-wrapper">
-    <div class="af-container">
+<div class="af-card">
 
-        <div class="af-left-col">
-            <div class="af-badge">
-                <span class="gear-icon">⚙️</span> Scheduled "Feature" Injection
-            </div>
+<div class="af-hero">
 
-            <h1 class="af-title">
-                We're <span class="af-highlight">Cooking</span> 🔥<br>
-                (But the kitchen is on fire).
-            </h1>
+<div class="af-logo">
+    <img
+        src="/IMG/AF LOGO 2.jpeg"
+        alt="AcademeForge Logo"
+        class="af-logo-img"
+    >
+</div>
 
-            <p class="af-desc">
-                The next version of AcademeForge is held together by duct tape, hope, and an unhealthy amount of caffeine. We are busy deleting old bugs just to introduce much cooler, shinier new ones.
-            </p>
-        </div>
+<div class="af-title">
+AcademeForge
+</div>
 
-        <div class="af-right-col">
-            <div class="af-cooking">🫠</div>
+<div class="af-tagline">
+Learning Beyond The Classroom
+</div>
 
-            <div class="af-message">Please stand by.</div>
+</div>
 
-            <div class="af-sub">
-                Our developers are aggressively refreshing Stack Overflow, blaming the browser cache, and questioning their life choices. Everything is perfectly normal.
-            </div>
+<div class="af-body">
 
-            <div class="af-status">
-                <div class="af-box">
-                    <div class="af-box-title">⚡ Speed</div>
-                    <div class="af-box-text">"Works on my machine"</div>
-                </div>
-                <div class="af-box">
-                    <div class="af-box-title">🎨 UI/UX</div>
-                    <div class="af-box-text">Adding more shadows</div>
-                </div>
-                <div class="af-box">
-                    <div class="af-box-title">🧪 Testing</div>
-                    <div class="af-box-text">We test in Production</div>
-                </div>
-                <div class="af-box">
-                    <div class="af-box-title">🚀 Launch</div>
-                    <div class="af-box-text">Sometime this century</div>
-                </div>
-            </div>
-        </div>
+<div class="af-version">
+Version 2.0.4
+</div>
 
-        <div class="af-footer">
-            © AcademeForge 2026 • Learning patience while we fix this mess.
-        </div>
+<div class="af-badge">
+Latest Stable Release
+</div>
 
-    </div>
-</main>
+<div class="af-desc">
+Download the latest version of AcademeForge and enjoy improved performance, bug fixes and a smoother learning experience.
+</div>
 
-<div id="site-footer" class="af-global"></div>
+<div class="af-section">
+
+<div class="af-section-title">
+What's New
+</div>
+
+<div class="af-feature"><span>✓</span> Faster Performance</div>
+<div class="af-feature"><span>✓</span> UI Improvements</div>
+<div class="af-feature"><span>✓</span> Bug Fixes</div>
+<div class="af-feature"><span>✓</span> Better Learning Experience</div>
+<div class="af-feature"><span>✓</span> Enhanced Navigation</div>
+
+</div>
+
+<a
+href="academeforge.apk"
+download
+class="af-download-btn"
+id="downloadBtn">
+
+⬇ Download AcademeForge v2.0.4
+
+</a>
+
+<div class="af-secure">
+🔒 Official & Secure Download
+</div>
+
+<div class="af-info">
+
+<div class="af-row">
+<div class="af-label">Version</div>
+<div class="af-value">2.0.4</div>
+</div>
+
+<div class="af-row">
+<div class="af-label">Platform</div>
+<div class="af-value">Android APK</div>
+</div>
+
+<div class="af-row">
+<div class="af-label">Developer</div>
+<div class="af-value">Devraj Kumar</div>
+</div>
+
+<div class="af-row">
+<div class="af-label">Status</div>
+<div class="af-value">Latest Release</div>
+</div>
+
+</div>
+
+<div class="af-footer">
+© AcademeForge • Learning Beyond The Classroom
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 <script>
-(function () {
-  var ORIGIN    = "https://academeforge.in";
-  var CSS_URL   = ORIGIN + "/assets/css/style.min.css?v=6.0";
-  var FRAG_BASE = ORIGIN + "/global/";
-  var SCOPE     = ".af-global";
 
-  function splitTop(s) {
-    var out = [], depth = 0, cur = "";
-    for (var i = 0; i < s.length; i++) {
-      var c = s[i];
-      if (c === "(" || c === "[") depth++;
-      else if (c === ")" || c === "]") depth--;
-      if (c === "," && depth === 0) { out.push(cur); cur = ""; }
-      else cur += c;
-    }
-    if (cur.trim()) out.push(cur);
-    return out;
-  }
+/* =========================
+   JAVASCRIPT
+========================= */
 
-  function scopeOne(sel) {
-    sel = sel.trim();
-    if (!sel) return sel;
-    if (sel === "*") return SCOPE + "," + SCOPE + " *";
+document
+.getElementById("downloadBtn")
+.addEventListener("click", function(){
 
-    var t = sel.match(/^(\[data-theme[^\]]*\])([\s\S]*)$/);
-    if (t) {
-      var tAfter = t[2].trim();
-      return t[1] + " " + SCOPE + (tAfter ? " " + tAfter : "");
-    }
+    console.log(
+    "AcademeForge v2.0.4 download started"
+    );
 
-    var m = sel.match(/^(html|body|:root)(?![\w-])([\s\S]*)$/i);
-    if (m) {
-      var head = m[1], rest = m[2];
+});
 
-      if (/^[\[.:#]/.test(rest)) {
-        var compound = rest.match(/^[^\s>+~]*/)[0];
-        var after = rest.slice(compound.length).trim();
-        return head + compound + " " + SCOPE + (after ? " " + after : "");
-      }
-
-      rest = rest.trim().replace(/^[>+~]\s*/, "").replace(/^body(?![\w-])\s*/i, "");
-      return rest ? SCOPE + " " + rest : SCOPE;
-    }
-    return SCOPE + " " + sel;
-  }
-
-  function scopeRules(rules) {
-    for (var i = 0; i < rules.length; i++) {
-      var r = rules[i];
-      if (r instanceof CSSStyleRule) {
-        try {
-          r.selectorText = splitTop(r.selectorText).map(scopeOne).join(",");
-        } catch (e) {  }
-      } else if (r.cssRules && !(r instanceof CSSKeyframesRule)) {
-        scopeRules(r.cssRules);
-      }
-    }
-  }
-
-  function loadScopedCss() {
-    fetch(CSS_URL)
-      .then(function (res) {
-        if (!res.ok) throw new Error("Failed to load " + CSS_URL);
-        return res.text();
-      })
-      .then(function (css) {
-        css = css.replace(/@import[^;]+;/gi, "");
-        css = css.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/gi, function (m, q, u) {
-          if (/^(data:|https?:|\/\/|#)/i.test(u)) return m;
-          try { return 'url("' + new URL(u, CSS_URL).href + '")'; } catch (e) { return m; }
-        });
-
-        var style = document.createElement("style");
-        style.id = "af-global-css";
-        style.media = "not all";
-        style.textContent = css;
-        document.head.appendChild(style);
-
-        scopeRules(style.sheet.cssRules);
-        style.media = "all";
-      })
-      .catch(function (err) { console.error("[AF] global CSS not applied:", err); });
-  }
-
-  var SKIP = /^(#|mailto:|tel:|javascript:|data:|https?:|\/\/)/i;
-  function fixUrls(root) {
-    root.querySelectorAll("[src],[href],[poster]").forEach(function (el) {
-      ["src", "href", "poster"].forEach(function (a) {
-        var v = el.getAttribute(a);
-        if (!v || SKIP.test(v)) return;
-        try { el.setAttribute(a, new URL(v, FRAG_BASE).href); } catch (e) {}
-      });
-    });
-  }
-  ["site-header", "site-footer"].forEach(function (id) {
-    var mount = document.getElementById(id);
-    if (!mount) return;
-    new MutationObserver(function () { fixUrls(mount); })
-      .observe(mount, { childList: true, subtree: true });
-  });
-
-  loadScopedCss();
-})();
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="https://academeforge.in/assets/js/include.js?v=3.0" defer></script>
 </body>
 </html>
